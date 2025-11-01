@@ -2,11 +2,11 @@ import streamlit as st
 import pickle
 import numpy as np
 
-# Load model
+st.title("Diabetes Prediction App")
+
+# Load model safely
 with open("model.pkl", "rb") as file:
     model = pickle.load(file)
-
-st.title("Diabetes Prediction App")
 
 preg = st.number_input("Pregnancies", 0, 20)
 glucose = st.number_input("Glucose", 0, 200)
@@ -19,4 +19,3 @@ if st.button("Predict"):
     features = np.array([[preg, glucose, bp, insulin, bmi, age]])
     result = model.predict(features)
     st.success("You are Diabetic" if result[0] == 1 else "You are Not Diabetic")
-
